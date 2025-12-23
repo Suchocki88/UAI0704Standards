@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7.4 Standards Alignment - Understanding AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            height: 1600px;
+            overflow-y: auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.2em;
+        }
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+        .header .lesson-info {
+            font-size: 0.95em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .content {
+            padding: 30px;
+        }
+        .intro {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2196F3;
+            margin-bottom: 30px;
+        }
+        .standards-selector {
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .standards-selector label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+        .standards-selector select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .standards-selector select:hover {
+            border-color: #764ba2;
+        }
+        .standards-selector select:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+        }
+        .standards-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+        .standards-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .standard-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid #667eea;
+        }
+        .standard-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .standard-section h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .standard-item {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 3px solid #9c27b0;
+        }
+        .standard-code {
+            font-weight: 600;
+            color: #764ba2;
+            font-family: 'Courier New', monospace;
+        }
+        .standard-description {
+            margin-top: 8px;
+            color: #555;
+        }
+        .alignment-note {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ff9800;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        .lesson-mapping {
+            background: #e8f5e9;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #4caf50;
+        }
+        .lesson-mapping strong {
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Standards Alignment</h1>
+            <div class="subtitle">Lesson 7.4: Authentic Voice in Your Writing</div>
+            <div class="lesson-info">Chapter 7: AI in Media | Project Day | Creative Writing and Voice Development</div>
+        </header>
+
+        <div class="content">
+            <div class="intro">
+                <strong>Lesson Overview:</strong> Students experience both sides of AI creation—what it can do and what it can't—then turn the lens on their own creative work. They discover that AI works best as a mirror: bring yourself, and AI can help you create; ask AI to generate meaning from nothing, and you get emptiness. Through a flat paragraph transformation activity, students experience how their specific choices bring writing to life. They then analyze their own creative projects to identify passages with authentic voice versus passages that could be stronger. The lesson introduces "Beyond the 70% Rule," showing how expert-level AI collaboration involves front-loaded contribution (character, plot, themes) rather than just word count.
+            </div>
+
+            <div class="standards-selector">
+                <label for="standards-dropdown">Select Standards Framework:</label>
+                <select id="standards-dropdown" onchange="showStandards(this.value)">
+                    <option value="">-- Choose State Standards --</option>
+                    <option value="texas">Texas (TEKS)</option>
+                    <option value="california">California</option>
+                    <option value="florida">Florida</option>
+                    <option value="newyork">New York</option>
+                    <option value="pennsylvania">Pennsylvania</option>
+                    <option value="illinois">Illinois</option>
+                    <option value="ohio">Ohio</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="northcarolina">North Carolina</option>
+                    <option value="michigan">Michigan</option>
+                    <option value="virginia">Virginia</option>
+                    <option value="washington">Washington</option>
+                    <option value="mississippi">Mississippi</option>
+                    <option value="ccss">Common Core State Standards (CCSS) - ELA</option>
+                    <option value="iste">ISTE Standards for Students</option>
+                    <option value="csta">CSTA K-12 Computer Science Standards</option>
+                    <option value="c3">C3 Framework for Social Studies</option>
+                </select>
+            </div>
+
+            <!-- Texas TEKS -->
+            <div id="texas" class="standards-content">
+                <div class="standard-section">
+                    <h2>Texas Essential Knowledge and Skills (TEKS)</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards through creative writing, voice development, and revision, with technology applications standards addressing effective AI tool use.
+                    </div>
+                    
+                    <h3>English Language Arts - Grade 11-12</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">ELA.110.36.c.10</div>
+                        <div class="standard-description">Revise drafts to improve clarity, development, organization, style, word choice, and sentence variety.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students revise flat paragraphs by bringing specific choices—transforming generic prose into writing with clarity and distinctive style. They then analyze and plan revisions for their own creative projects.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">ELA.110.36.c.11</div>
+                        <div class="standard-description">Edit drafts using standard English conventions.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Through iterative prompting with Alia, students refine drafts, learning to distinguish between technically correct but lifeless prose and writing with authentic voice.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">ELA.110.36.b.6</div>
+                        <div class="standard-description">Analyze how the author's diction and syntax contribute to mood, voice, and tone.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students analyze their own creative work for voice—identifying passages with distinctive diction and syntax versus passages with generic AI-like patterns.</div>
+                    </div>
+                    
+                    <h3>Technology Applications</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">TECH.126.12.c.2</div>
+                        <div class="standard-description">Use digital tools to create, revise, and publish work.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students use AI as a digital tool for creative revision, learning the "mirror" principle—that AI tools work best when users bring substantive input rather than expecting the tool to generate meaning.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- California Standards -->
+            <div id="california" class="standards-content">
+                <div class="standard-section">
+                    <h2>California State Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards for writing, with emphasis on voice development, revision, and creative expression.
+                    </div>
+                    
+                    <h3>English Language Arts - Grades 11-12</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.11-12.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences or events using effective technique, well-chosen details, and well-structured event sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students transform flat paragraphs into narratives with well-chosen details by bringing specific choices—who are these people? what's at stake? what detail makes this real?—demonstrating effective narrative technique.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.11-12.3.D</div>
+                        <div class="standard-description">Use precise words and phrases, telling details, and sensory language to convey a vivid picture.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The flat paragraph activity explicitly targets this: replacing "she felt sad" with precise emotional language, substituting generic metaphors with telling details that convey vivid, specific experience.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.11-12.5</div>
+                        <div class="standard-description">Develop and strengthen writing as needed by planning, revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students strengthen writing through the four-step transformation process: bring specifics, prompt Alia, compare results, iterate. They apply this approach to their own creative projects.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Florida Standards -->
+            <div id="florida" class="standards-content">
+                <div class="standard-section">
+                    <h2>Florida B.E.S.T. Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards through creative writing, voice development, and revision practice.
+                    </div>
+                    
+                    <h3>English Language Arts - Grades 11-12</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">ELA.11.C.1.3</div>
+                        <div class="standard-description">Write narratives using narrative techniques, varied transitions, and a clearly established point of view.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narrative techniques by transforming flat paragraphs—establishing specific points of view (who is this person? what do they want?) that AI cannot generate alone.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">ELA.11.C.1.5</div>
+                        <div class="standard-description">Improve writing by editing for clarity and purposeful and varied sentence structure.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students improve writing by editing AI output and their own drafts—identifying where sentence structure is technically correct but lifeless, and revising for purposeful variation that serves voice.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">ELA.11.V.1.1</div>
+                        <div class="standard-description">Integrate academic vocabulary appropriate to grade level in speaking and writing.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students use vocabulary from the lesson (authentic voice, AI artifacts, mirror metaphor, iteration) to analyze their own writing and articulate what distinguishes strong passages from weak ones.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New York Standards -->
+            <div id="newyork" class="standards-content">
+                <div class="standard-section">
+                    <h2>New York State Learning Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards for writing and language through creative voice development and revision.
+                    </div>
+                    
+                    <h3>English Language Arts - Grades 11-12</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">11-12W3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences using effective technique, relevant details, and well-structured sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives by transforming flat paragraphs with relevant, specific details—moving from generic "sad about everything" to precise emotional experience with clear stakes.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">11-12W5</div>
+                        <div class="standard-description">Develop and strengthen writing by revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The iterative transformation process (bring specifics → prompt → compare → reiterate) teaches students to strengthen writing through multiple approaches, not expecting perfection from first drafts.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">11-12L3</div>
+                        <div class="standard-description">Apply knowledge of language to make effective choices for meaning, style, and tone.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students make effective language choices by bringing specifics to the mirror—deciding what a scene is really about, what tone it should have, what style serves the meaning they intend.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pennsylvania Standards -->
+            <div id="pennsylvania" class="standards-content">
+                <div class="standard-section">
+                    <h2>Pennsylvania Academic Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses writing standards through creative composition and voice development.
+                    </div>
+                    
+                    <h3>Reading, Writing, Speaking, Listening</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1.4.11-12.M</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences using effective technique and details.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives through the flat paragraph transformation—learning that effective technique requires specific human choices about character, stakes, and detail.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1.4.11-12.T</div>
+                        <div class="standard-description">Develop and strengthen writing by revising, with consideration for purpose, audience, and task.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students strengthen writing through iterative revision with Alia, considering purpose (what is this scene about?) and task (transform flat prose into authentic voice).</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1.4.11-12.E</div>
+                        <div class="standard-description">Write with awareness of style, using language to create a specific tone.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop awareness of style by contrasting AI's generic tone with authentic voice—learning to create specific tone through accumulated choices only they would make.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Illinois Standards -->
+            <div id="illinois" class="standards-content">
+                <div class="standard-section">
+                    <h2>Illinois Learning Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards through creative writing and revision practice.
+                    </div>
+                    
+                    <h3>English Language Arts</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">11-12.W.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences using effective technique, well-chosen details, and well-structured event sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives by transforming flat paragraphs—providing the well-chosen details and effective technique that AI cannot generate from nothing.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">11-12.W.5</div>
+                        <div class="standard-description">Develop and strengthen writing as needed by planning, revising, editing, rewriting.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The four-step transformation process teaches iterative revision: bring specifics (planning), prompt Alia (drafting), compare results (evaluating), reiterate (rewriting).</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">11-12.L.3</div>
+                        <div class="standard-description">Apply knowledge of language to make effective choices for meaning and style.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students make effective choices by bringing specifics to the transformation activity—learning that meaning and style emerge from human decisions, not AI generation.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ohio Standards -->
+            <div id="ohio" class="standards-content">
+                <div class="standard-section">
+                    <h2>Ohio's Learning Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards for writing and language through creative voice development.
+                    </div>
+                    
+                    <h3>English Language Arts - Grades 11-12</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">W.11-12.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences using effective technique, well-chosen details, and well-structured sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives through the transformation activity, learning that well-chosen details require human choice—deciding what specifically happened, who these people are, what's at stake.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">W.11-12.5</div>
+                        <div class="standard-description">Develop and strengthen writing by planning, revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students strengthen writing through iterative collaboration with Alia—planning (bringing specifics), revising (comparing results), and rewriting (iterating toward authentic voice).</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">L.11-12.3</div>
+                        <div class="standard-description">Apply knowledge of language to make effective choices for meaning, style, and comprehension.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students apply language knowledge by analyzing their own creative work—identifying where choices serve meaning and style versus where generic language undermines voice.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Georgia Standards -->
+            <div id="georgia" class="standards-content">
+                <div class="standard-section">
+                    <h2>Georgia Standards of Excellence</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards through creative writing, voice development, and revision.
+                    </div>
+                    
+                    <h3>English Language Arts - Grades 11-12</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">ELAGSE11-12W3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences using effective technique, well-chosen details, and well-structured event sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives by transforming flat paragraphs—providing well-chosen details through specific human choices that AI cannot generate independently.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">ELAGSE11-12W5</div>
+                        <div class="standard-description">Develop and strengthen writing as needed by planning, revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The iterative transformation process (bring specifics → prompt → compare → reiterate) teaches students to strengthen writing through multiple approaches and continuous refinement.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">ELAGSE11-12L3</div>
+                        <div class="standard-description">Apply knowledge of language to understand how language functions in different contexts, to make effective choices for meaning or style.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students apply language knowledge by analyzing authentic voice characteristics in their own work—recognizing how specific choices create meaning and style that generic language cannot.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- North Carolina Standards -->
+            <div id="northcarolina" class="standards-content">
+                <div class="standard-section">
+                    <h2>North Carolina Standard Course of Study</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards through creative writing and voice development.
+                    </div>
+                    
+                    <h3>English Language Arts - Grades 11-12</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">W.11-12.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences using effective technique, well-chosen details, and well-structured sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives through the flat paragraph transformation, learning that effective technique and well-chosen details require human decisions about meaning and stakes.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">W.11-12.5</div>
+                        <div class="standard-description">Develop and strengthen writing by planning, revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students strengthen their creative projects by analyzing authentic versus weak passages, then planning revisions to strengthen voice throughout their work.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">L.11-12.3</div>
+                        <div class="standard-description">Apply knowledge of language to make effective choices for meaning and style.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The mirror metaphor teaches that effective language choices come from the writer, not the tool—students must bring meaning and style intentions for AI to reflect.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Michigan Standards -->
+            <div id="michigan" class="standards-content">
+                <div class="standard-section">
+                    <h2>Michigan Merit Curriculum Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards through creative writing and voice development.
+                    </div>
+                    
+                    <h3>English Language Arts</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">W.11-12.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences using effective technique, well-chosen details, and well-structured sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives by transforming flat paragraphs—bringing specific choices about character, stakes, and detail that create effective technique.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">W.11-12.5</div>
+                        <div class="standard-description">Develop and strengthen writing by planning, revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The four-step transformation process teaches iterative development: students plan (bring specifics), draft (prompt Alia), evaluate (compare), and revise (iterate).</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">L.11-12.3</div>
+                        <div class="standard-description">Apply knowledge of language to understand how language functions in different contexts and make effective choices.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students apply language knowledge by analyzing their own creative work—identifying where their choices create authentic voice versus where generic language signals weak passages.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Virginia Standards -->
+            <div id="virginia" class="standards-content">
+                <div class="standard-section">
+                    <h2>Virginia Standards of Learning</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English standards through creative writing and voice development.
+                    </div>
+                    
+                    <h3>English</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">11.6</div>
+                        <div class="standard-description">The student will write in a variety of forms, with emphasis on persuasion and literary analysis.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students write narrative prose through the transformation activity and analyze their own creative work for authentic voice—combining creative writing with literary self-analysis.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">11.7</div>
+                        <div class="standard-description">The student will self- and peer-edit writing for correct use of language, spelling, punctuation, and sentence structure.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students self-edit through the transformation process and analyze their creative projects, identifying passages that need revision to strengthen voice and authenticity.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">11.8</div>
+                        <div class="standard-description">The student will develop expository and informational, analysis, and persuasive/argumentative writings.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Reflection questions require students to develop expository writing analyzing their creative process—explaining what makes their voice distinctive and what revisions would strengthen weaker passages.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Washington Standards -->
+            <div id="washington" class="standards-content">
+                <div class="standard-section">
+                    <h2>Washington State Learning Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards through creative writing and voice development.
+                    </div>
+                    
+                    <h3>English Language Arts</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.11-12.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences using effective technique, well-chosen details, and well-structured sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives through the flat paragraph transformation—learning that effective technique requires specific human choices that AI cannot provide.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.11-12.5</div>
+                        <div class="standard-description">Develop and strengthen writing by planning, revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students strengthen writing through iterative collaboration—bringing specifics, prompting Alia, comparing results, and iterating toward authentic voice.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mississippi Standards -->
+            <div id="mississippi" class="standards-content">
+                <div class="standard-section">
+                    <h2>Mississippi College and Career Readiness Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses English language arts standards through creative writing and voice development.
+                    </div>
+                    
+                    <h3>Writing</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">W.11-12.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences using effective technique, well-chosen details, and well-structured event sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives by transforming flat paragraphs—providing well-chosen details through specific decisions about character, stakes, and meaning.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">W.11-12.5</div>
+                        <div class="standard-description">Develop and strengthen writing as needed by planning, revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The iterative transformation process teaches students to strengthen writing through multiple approaches—not expecting perfection from single drafts.</div>
+                    </div>
+                    
+                    <h3>Language</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">L.11-12.3</div>
+                        <div class="standard-description">Apply knowledge of language to understand how language functions in different contexts, to make effective choices for meaning or style.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students apply language knowledge by analyzing authentic voice in their own work—identifying where effective choices create distinctive style versus where generic language weakens voice.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Core Standards -->
+            <div id="ccss" class="standards-content">
+                <div class="standard-section">
+                    <h2>Common Core State Standards - English Language Arts</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 addresses writing and language standards through creative voice development and revision practice.
+                    </div>
+                    
+                    <h3>Writing Standards - Grades 11-12</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.11-12.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences or events using effective technique, well-chosen details, and well-structured event sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students develop narratives by transforming flat paragraphs—bringing the specific choices (character, stakes, detail) that create effective technique and well-chosen details.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.11-12.3.B</div>
+                        <div class="standard-description">Use narrative techniques, such as dialogue, pacing, description, reflection, and multiple plot lines, to develop experiences, events, and/or characters.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students use narrative techniques to transform flat paragraphs—adding dialogue, specific description, and character development that AI cannot generate from nothing.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.11-12.3.D</div>
+                        <div class="standard-description">Use precise words and phrases, telling details, and sensory language to convey a vivid picture of the experiences, events, setting, and/or characters.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The transformation activity directly targets this—replacing generic language ("she felt sad") with precise words, telling details, and sensory specifics that create vivid, authentic voice.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.11-12.5</div>
+                        <div class="standard-description">Develop and strengthen writing as needed by planning, revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The four-step transformation process teaches iterative development: plan (bring specifics), draft (prompt Alia), evaluate (compare results), revise (iterate toward authentic voice).</div>
+                    </div>
+                    
+                    <h3>Language Standards - Grades 11-12</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.L.11-12.3</div>
+                        <div class="standard-description">Apply knowledge of language to understand how language functions in different contexts, to make effective choices for meaning or style, and to comprehend more fully when reading or listening.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students apply language knowledge by analyzing their own creative work for authentic voice—understanding how specific choices create meaning and style versus how generic language undermines voice.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.L.11-12.3.A</div>
+                        <div class="standard-description">Vary syntax for effect, consulting references for guidance as needed; apply an understanding of syntax to the study of complex texts when reading.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students learn to vary syntax for effect by contrasting "technically correct but lifeless" prose with authentic voice—understanding that varied syntax serves meaning, not just correctness.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ISTE Standards -->
+            <div id="iste" class="standards-content">
+                <div class="standard-section">
+                    <h2>ISTE Standards for Students</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 strongly aligns with ISTE standards for creative communication, empowered learning, and innovative design.
+                    </div>
+                    
+                    <h3>1. Empowered Learner</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1.1.c</div>
+                        <div class="standard-description">Students use technology to seek feedback that informs and improves their practice and to demonstrate their learning in a variety of ways.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students use Alia to seek feedback on their writing—both through the transformation activity and through voice analysis of their creative projects. AI feedback informs revision decisions.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1.1.d</div>
+                        <div class="standard-description">Students understand the fundamental concepts of technology operations, demonstrate the ability to choose, use and troubleshoot current technologies.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students understand AI's fundamental operations (mirror principle)—learning to use AI effectively by bringing substance rather than expecting AI to generate meaning from nothing.</div>
+                    </div>
+                    
+                    <h3>4. Innovative Designer</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1.4.c</div>
+                        <div class="standard-description">Students develop, test and refine prototypes as part of a cyclical design process.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The four-step transformation process is iterative design: students develop (bring specifics), test (prompt Alia), and refine (compare and iterate) until the writing achieves authentic voice.</div>
+                    </div>
+                    
+                    <h3>6. Creative Communicator</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1.6.a</div>
+                        <div class="standard-description">Students choose the appropriate platforms and tools for meeting the desired objectives of their creation or communication.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students learn when AI tools are appropriate (when you bring substance to reflect) versus when they fail (when you ask for meaning from nothing)—understanding tool selection based on objectives.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1.6.b</div>
+                        <div class="standard-description">Students create original works or responsibly repurpose or remix digital resources into new creations.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students create original works by transforming flat paragraphs with their specific choices—responsibly using AI as a tool while ensuring the meaning and voice come from their own creative decisions.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1.6.d</div>
+                        <div class="standard-description">Students publish or present content that customizes the message and medium for their intended audiences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students customize content by bringing specific intentions to AI collaboration—learning that effective communication requires human decisions about message, not generic AI output.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSTA Standards -->
+            <div id="csta" class="standards-content">
+                <div class="standard-section">
+                    <h2>CSTA K-12 Computer Science Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 aligns with CSTA standards addressing human-computer collaboration, AI capabilities, and responsible technology use.
+                    </div>
+                    
+                    <h3>Algorithms and Programming (AP)</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">3B-AP-08</div>
+                        <div class="standard-description">Describe how artificial intelligence drives many software and physical systems.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students experience how AI drives text generation—understanding through the mirror metaphor that AI reflects input patterns rather than generating meaning independently.</div>
+                    </div>
+                    
+                    <h3>Impacts of Computing (IC)</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">3A-IC-24</div>
+                        <div class="standard-description">Evaluate the ways computing impacts personal, ethical, social, economic, and cultural practices.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students evaluate AI's impact on creative practice—understanding that AI collaboration changes but doesn't replace human creative contribution. The "Beyond the 70% Rule" discussion addresses cultural practices around authorship.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">3B-IC-25</div>
+                        <div class="standard-description">Evaluate computational artifacts to maximize their beneficial effects and minimize harmful effects on society.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students learn to maximize AI's beneficial effects (reflection, variation, polish) while avoiding harmful effects (hollow output, loss of authentic voice) through informed collaboration practices.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">3B-IC-27</div>
+                        <div class="standard-description">Predict how computational innovations that have transformed the world might impact diverse populations differently.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The "Beyond the 70% Rule" discussion shows how AI collaboration impacts writers differently based on skill level—novices need the 70% guideline while experts can front-load contribution differently.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C3 Framework -->
+            <div id="c3" class="standards-content">
+                <div class="standard-section">
+                    <h2>C3 Framework for Social Studies</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 7.4 aligns with C3 Framework standards for inquiry, communication, and applying learning to real-world contexts.
+                    </div>
+                    
+                    <h3>Dimension 1: Developing Questions and Planning Inquiries</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">D1.1.9-12</div>
+                        <div class="standard-description">Explain how a question reflects an enduring issue in the field.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> The lesson addresses enduring questions about creativity, authorship, and authenticity: What makes writing genuinely "yours"? What is the human contribution to creative work? These questions gain new urgency with AI tools.</div>
+                    </div>
+                    
+                    <h3>Dimension 4: Communicating Conclusions and Taking Informed Action</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">D4.1.9-12</div>
+                        <div class="standard-description">Construct arguments using precise and knowledgeable claims, with evidence from multiple sources.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Reflection questions require students to construct arguments about their creative process—explaining what makes their voice distinctive and what specific choices transformed flat paragraphs, with evidence from their own work.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">D4.2.9-12</div>
+                        <div class="standard-description">Construct explanations using reasoning, correct sequence, examples, and details.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students construct explanations of the transformation process—describing the sequence (bring specifics → prompt → compare → iterate) with specific examples from their own work.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">D4.6.9-12</div>
+                        <div class="standard-description">Use disciplinary and interdisciplinary lenses to understand the characteristics and causes of local, regional, and global problems.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students use both literary (voice, craft, authenticity) and technological (AI capabilities, human-machine collaboration) lenses to understand challenges of creative work in the AI era.</div>
+                    </div>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">D4.7.9-12</div>
+                        <div class="standard-description">Assess options for individual and collective action to address local, regional, and global problems.</div>
+                        <div class="lesson-mapping"><strong>Lesson 7.4 Alignment:</strong> Students assess options for their own creative practice—how to use AI as an effective mirror while maintaining authentic voice, applying the mirror principle to their ongoing creative projects.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- End content -->
+    </div><!-- End container -->
+    
+    <script>
+        function showStandards(value) {
+            // Hide all standards content
+            const allContent = document.querySelectorAll('.standards-content');
+            allContent.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected standards
+            if (value) {
+                const selectedContent = document.getElementById(value);
+                if (selectedContent) {
+                    selectedContent.classList.add('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
